@@ -1,0 +1,63 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:FRESHAir"
+             x:Class="FRESHAir.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+      <Style Selector="TextBlock">
+        <Setter Property="FontFamily" Value="avares://FRESHAir/Assets/Fonts#Source Sans 3"/>
+        <Setter Property="FontSize" Value="16"/>
+      </Style>
+    </Application.Styles>
+
+  <Application.Resources>
+    <ResourceDictionary>
+
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+          <SolidColorBrush x:Key="PrimaryTextColor" Color="Black"/>
+          <SolidColorBrush x:Key="SecondaryTextColor" Color="#525252"/>
+          <SolidColorBrush x:Key="NavBarColor" Color="#e6e6e6"/>
+          <SolidColorBrush x:Key="ControlBoxColor" Color="#e6e6e6"/>
+          <SolidColorBrush x:Key="BackgroundColor" Color="#FFFFFF"/>
+          <SolidColorBrush x:Key="SecondaryColor" Color="#f2f2f2"/>
+          <SolidColorBrush x:Key="ForegroundColor" Color="#e6e6e6"/>
+          <SolidColorBrush x:Key="ControlColor" Color="#A1A1A1"/>
+
+          <SolidColorBrush x:Key="AccentColor" Color="#FF338BC1"/>
+          <LinearGradientBrush x:Key="AccentGradientColor" EndPoint="0,0.5" StartPoint="1, 0.5">
+            <GradientStop Color="#FF338BC1" Offset="0"/>
+            <GradientStop Color="#FF69B578" Offset="1"/>
+          </LinearGradientBrush>
+          <SolidColorBrush x:Key="PrimaryTextColorOverAccent" Color="Black"/>
+          <SolidColorBrush x:Key="SecondaryTextColorOverAccent" Color="#DADADA"/>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="PrimaryTextColor" Color="White"/>
+          <SolidColorBrush x:Key="SecondaryTextColor" Color="#DADADA"/>
+          <SolidColorBrush x:Key="ControlBoxColor" Color="#22252A"/>
+          <SolidColorBrush x:Key="NavBarColor" Color="#22252A"/>
+          <SolidColorBrush x:Key="ForegroundColor" Color="#22252A"/>
+          <SolidColorBrush x:Key="SecondaryColor" Color="#16191D"/>
+          <SolidColorBrush x:Key="BackgroundColor" Color="#0B0D0E"/>
+          <SolidColorBrush x:Key="ControlColor" Color="#686F73"/>
+
+          <SolidColorBrush x:Key="AccentColor" Color="#FF338BC1"/>
+          <LinearGradientBrush x:Key="AccentGradientColor" EndPoint="0,0.5" StartPoint="1, 0.5">
+            <GradientStop Color="#FF338BC1" Offset="0"/>
+            <GradientStop Color="#FF69B578" Offset="1"/>
+          </LinearGradientBrush>
+          <SolidColorBrush x:Key="PrimaryTextColorOverAccent" Color="White"/>
+          <SolidColorBrush x:Key="SecondaryTextColorOverAccent" Color="#DADADA"/>
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

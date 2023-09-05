@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRESHAir", "FRESHAir\FRESHAir\FRESHAir.csproj", "{653843FD-E1D1-49BE-A1F0-73858BA7E412}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRESHAir.Android", "FRESHAir\FRESHAir.Android\FRESHAir.Android.csproj", "{24E1B435-40BC-49CE-ABD8-1B289E6E822F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRESHAir.Desktop", "FRESHAir\FRESHAir.Desktop\FRESHAir.Desktop.csproj", "{CED8887E-C6EC-4116-88B0-52775DAF360C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRESHAir.iOS", "FRESHAir\FRESHAir.iOS\FRESHAir.iOS.csproj", "{2C2C53D2-2B66-480D-9F35-97194F95E238}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRESHAir.Browser", "FRESHAir\FRESHAir.Browser\FRESHAir.Browser.csproj", "{7026FC74-0D83-4406-9E05-44E2687C8C55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{653843FD-E1D1-49BE-A1F0-73858BA7E412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{653843FD-E1D1-49BE-A1F0-73858BA7E412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{653843FD-E1D1-49BE-A1F0-73858BA7E412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{653843FD-E1D1-49BE-A1F0-73858BA7E412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24E1B435-40BC-49CE-ABD8-1B289E6E822F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E1B435-40BC-49CE-ABD8-1B289E6E822F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E1B435-40BC-49CE-ABD8-1B289E6E822F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E1B435-40BC-49CE-ABD8-1B289E6E822F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED8887E-C6EC-4116-88B0-52775DAF360C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED8887E-C6EC-4116-88B0-52775DAF360C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED8887E-C6EC-4116-88B0-52775DAF360C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED8887E-C6EC-4116-88B0-52775DAF360C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C2C53D2-2B66-480D-9F35-97194F95E238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C2C53D2-2B66-480D-9F35-97194F95E238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C2C53D2-2B66-480D-9F35-97194F95E238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C2C53D2-2B66-480D-9F35-97194F95E238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7026FC74-0D83-4406-9E05-44E2687C8C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7026FC74-0D83-4406-9E05-44E2687C8C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7026FC74-0D83-4406-9E05-44E2687C8C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7026FC74-0D83-4406-9E05-44E2687C8C55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0881418-C5F1-4756-B46F-A715C4CFD099}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:FRESHAir.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FRESHAir.Views.WeatherView"
+             x:DataType="vm:WeatherViewViewModel">
+  <Design.DataContext>
+    <vm:WeatherViewViewModel/>
+  </Design.DataContext>
+
+  <StackPanel Margin="10">
+    <TextBlock Text="{Binding LocationName}"/>
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Text="{Binding CurrentTemperature.Value}" FontWeight="Bold" FontSize="50"/>
+      <TextBlock Margin="5,0,0,0" Text="{Binding CurrentTemperature.Scale}" VerticalAlignment="Center"/>
+    </StackPanel>
+    
+    <Button Content="Toggle temperature scale" Command="{Binding ToggleTemperatureScale}"/>
+  </StackPanel>
+</UserControl>
