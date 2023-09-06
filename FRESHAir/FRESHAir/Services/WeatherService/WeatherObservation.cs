@@ -8,6 +8,8 @@ namespace FRESHAir.Services.WeatherService
 {
     public class WeatherObservation
     {
+        public DateTime Time { get; init; }
+
         public Temperature CurrentTemperature { get; init; }
 
         public decimal RelativeHumidity { get; init; }
