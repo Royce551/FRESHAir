@@ -20,22 +20,34 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
             var response = await HttpClient.PostAsync("https://api-thetroposphere.vicr123.com/api/locations/search", new StringContent($"{{\"query\":\"{location}\"}}", Encoding.UTF8, "application/json"));
 
             var responseAsString = await response.Content.ReadAsStringAsync();
-            var possibleLocations = JsonSerializer.Deserialize<List<TheTroposphereLocation>>(responseAsString);
-
+            var possibleLocations = JsonSerializer.Deserialize<List<TheTroposphereLocation>>(responseAsString) ?? throw new Exception();
             var locationToUse = possibleLocations[0];
 
-            try
-            {
-                var forecast = await HttpClient.GetFromJsonAsync<METNorwayWeatherResponse>($"https://api.met.no/weatherapi/locationforecast/2.0/complete?lat={locationToUse.Latitude}&lon={locationToUse.Longitude}");
-                Console.WriteLine(forecast);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-           
+            var forecast = await HttpClient.GetFromJsonAsync<METNorwayWeatherResponse>($"https://api.met.no/weatherapi/locationforecast/2.0/complete?lat={locationToUse.Latitude}&lon={locationToUse.Longitude}") ?? throw new Exception();
 
-            throw new NotImplementedException();
+            var weatherNow = forecast.Properties.Timeseries[0];
+            var weatherForecast = forecast.Properties.Timeseries.Take(new Range(new(1), new(forecast.Properties.Timeseries.Length)));
+
+            List<WeatherObservation> forecastAsGeneralWeatherObservation = new();
+
+            foreach (var forecastTime in weatherForecast)
+            {
+                forecastAsGeneralWeatherObservation.Add(new WeatherObservation()
+                {
+                    CurrentTemperature = Temperature.FromCelsius(forecastTime.Data.CurrentData.Observation.AirTemperature),
+                    RelativeHumidity = forecastTime.Data.CurrentData.Observation.RelativeHumidity
+                });
+            }
+
+            return new WeatherSummary()
+            {
+                CurrentWeather = new WeatherObservation()
+                {
+                    CurrentTemperature = Temperature.FromCelsius(weatherNow.Data.CurrentData.Observation.AirTemperature),
+                    RelativeHumidity = weatherNow.Data.CurrentData.Observation.RelativeHumidity
+                },
+                ForecastedWeather = forecastAsGeneralWeatherObservation.ToArray()
+            };
         }
     }
 
