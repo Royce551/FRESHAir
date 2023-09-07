@@ -17,6 +17,6 @@
       <TextBlock Margin="5,0,0,0" Text="{Binding CurrentTemperature.Scale}" VerticalAlignment="Center"/>
     </StackPanel>
     
-    <Button Content="Toggle temperature scale" Command="{Binding ToggleTemperatureScale}"/>
+    <Button Content="Get forecast! :o" Command="{Binding ToggleTemperatureScale}"/>
   </StackPanel>
 </UserControl>

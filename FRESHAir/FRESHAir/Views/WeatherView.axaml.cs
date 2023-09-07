@@ -8,6 +8,7 @@ namespace FRESHAir.Views
         public WeatherView()
         {
             DataContext = new WeatherViewViewModel();
+            (DataContext as WeatherViewViewModel).Initialize();
             InitializeComponent();
         }
     }
