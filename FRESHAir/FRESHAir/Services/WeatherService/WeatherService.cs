@@ -26,6 +26,7 @@ namespace FRESHAir.Services.WeatherService
             };
         }
 
-        public static async Task<WeatherSummary> GetWeatherSummaryAsync(string location) => await CurrentWeatherProvider.GetWeatherSummaryAsync(location);
+        public static async Task<WeatherSummary> GetWeatherSummaryAsync(string location, TemperatureScale temperatureScale) => 
+            await CurrentWeatherProvider.GetWeatherSummaryAsync(location, temperatureScale);
     }
 }

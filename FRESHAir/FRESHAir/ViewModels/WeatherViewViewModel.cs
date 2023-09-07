@@ -16,6 +16,12 @@ namespace FRESHAir.ViewModels
         [ObservableProperty]
         private Temperature currentTemperature = Temperature.FromCelsius(29);
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Location))]
+        private WeatherSummary? currentWeatherSummary;
+
+        public string Location => $"{currentWeatherSummary?.LocationName}, {currentWeatherSummary?.Admin1}, {currentWeatherSummary?.CountryCode}";
+
         private TemperatureScale scale;
         public TemperatureScale Scale
         {
@@ -27,22 +33,10 @@ namespace FRESHAir.ViewModels
             }
         }
 
-        public async Task ToggleTemperatureScale()
-        {
-            //if (Scale != TemperatureScale.Kelvin)
-            //    Scale = (TemperatureScale)(Scale + 1);
-            //else Scale = TemperatureScale.Celsius;
-            await WeatherService.GetWeatherSummaryAsync("Lafayette");
-        }
-
-        public WeatherViewViewModel()
-        {
-            
-        }
 
         public async Task Initialize()
-        { 
-            
+        {
+            CurrentWeatherSummary = await WeatherService.GetWeatherSummaryAsync("McMurdo Station", TemperatureScale.Fahrenheit);
         }
 
     }

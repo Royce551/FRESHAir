@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:FRESHAir.ViewModels"
+             xmlns:weathertypes="clr-namespace:FRESHAir.Services.WeatherService"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FRESHAir.Views.WeatherView"
              x:DataType="vm:WeatherViewViewModel">
@@ -11,12 +12,28 @@
   </Design.DataContext>
 
   <StackPanel Margin="10">
-    <TextBlock Text="{Binding LocationName}"/>
+    <TextBlock Text="{Binding Location}"/>
     <StackPanel Orientation="Horizontal">
-      <TextBlock Text="{Binding CurrentTemperature.Value}" FontWeight="Bold" FontSize="50"/>
-      <TextBlock Margin="5,0,0,0" Text="{Binding CurrentTemperature.Scale}" VerticalAlignment="Center"/>
+      <TextBlock Text="{Binding CurrentWeatherSummary.CurrentWeather.CurrentTemperature.Value}" FontWeight="Bold" FontSize="50"/>
+      <TextBlock Margin="5,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.CurrentTemperature.Scale}" VerticalAlignment="Center"/>
+
+      <Border Margin="0,20,0,0" Background="{DynamicResource SecondaryColor}" CornerRadius="5">
+        <StackPanel>
+          <TextBlock Text="Forecast" FontWeight="Bold"/>
+          <ItemsControl ItemsSource="{Binding CurrentWeatherSummary.ForecastedWeather}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate DataType="weathertypes:WeatherObservation">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{Binding Time}" Foreground="{DynamicResource SecondaryTextColor}"/>
+                  <TextBlock Margin="10,0,0,0" Text="{Binding CurrentTemperature.Value}"/>
+                  <TextBlock Margin="5,0,0,0" Text="{Binding CurrentTemperature.Scale}"/>
+                  <TextBlock Margin="10,0,0,0" Text="{Binding RelativeHumidity}"/>
+                </StackPanel>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </Border>
     </StackPanel>
-    
-    <Button Content="Get forecast! :o" Command="{Binding ToggleTemperatureScale}"/>
   </StackPanel>
 </UserControl>

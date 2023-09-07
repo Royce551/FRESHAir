@@ -34,6 +34,12 @@ namespace FRESHAir.Services.WeatherService
         {
             ValueInCelsius = (value - 32) * 5 / 9
         };
+
+        public Temperature WithScale(TemperatureScale scale)
+        {
+            Scale = scale;
+            return this;
+        }
     }
 
     public enum TemperatureScale

@@ -15,7 +15,7 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
     {
         public HttpClient HttpClient { get; init; } = default!;
 
-        public async Task<WeatherSummary> GetWeatherSummaryAsync(string location)
+        public async Task<WeatherSummary> GetWeatherSummaryAsync(string location, TemperatureScale temperatureScale)
         {
             var response = await HttpClient.PostAsync("https://api-thetroposphere.vicr123.com/api/locations/search", new StringContent($"{{\"query\":\"{location}\"}}", Encoding.UTF8, "application/json"));
 
@@ -34,8 +34,9 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
             {
                 forecastAsGeneralWeatherObservation.Add(new WeatherObservation()
                 {
-                    CurrentTemperature = Temperature.FromCelsius(forecastTime.Data.CurrentData.Observation.AirTemperature),
-                    RelativeHumidity = forecastTime.Data.CurrentData.Observation.RelativeHumidity
+                    CurrentTemperature = Temperature.FromCelsius(forecastTime.Data.CurrentData.Observation.AirTemperature).WithScale(temperatureScale),
+                    RelativeHumidity = forecastTime.Data.CurrentData.Observation.RelativeHumidity,
+                    Time = forecastTime.Time.ToLocalTime()
                 });
             }
 
@@ -43,10 +44,14 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
             {
                 CurrentWeather = new WeatherObservation()
                 {
-                    CurrentTemperature = Temperature.FromCelsius(weatherNow.Data.CurrentData.Observation.AirTemperature),
-                    RelativeHumidity = weatherNow.Data.CurrentData.Observation.RelativeHumidity
+                    CurrentTemperature = Temperature.FromCelsius(weatherNow.Data.CurrentData.Observation.AirTemperature).WithScale(temperatureScale),
+                    RelativeHumidity = weatherNow.Data.CurrentData.Observation.RelativeHumidity,
+                    Time = weatherNow.Time.ToLocalTime()
                 },
-                ForecastedWeather = forecastAsGeneralWeatherObservation.ToArray()
+                ForecastedWeather = forecastAsGeneralWeatherObservation.ToArray(),
+                LocationName = locationToUse.Name,
+                Admin1 = locationToUse.Admin1,
+                CountryCode = locationToUse.CountryCode
             };
         }
     }
