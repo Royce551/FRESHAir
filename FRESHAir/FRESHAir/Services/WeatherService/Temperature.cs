@@ -32,7 +32,7 @@ namespace FRESHAir.Services.WeatherService
 
         public static Temperature FromFahrenheit(decimal value) => new()
         {
-            ValueInCelsius = (value - 32) * 5 / 9
+            ValueInCelsius = Math.Round((value - 32) * 5 / 9)
         };
 
         public Temperature WithScale(TemperatureScale scale)

@@ -1,4 +1,5 @@
-﻿using FRESHAir.Services.WeatherService.METNorwayWeatherProvider;
+﻿using Avalonia.Controls;
+using FRESHAir.Services.WeatherService.METNorwayWeatherProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,20 @@ namespace FRESHAir.Services.WeatherService
             System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls;
             HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd("FRESHAir/1.0.0 (https://github.com/royce551/freshair)");
 
-            CurrentWeatherProvider = new METNorwayWeatherProvider.METNorwayWeatherProvider()
+            if (Design.IsDesignMode)
             {
-                HttpClient = HttpClient
-            };
+                CurrentWeatherProvider = new DummyWeatherProvider()
+                {
+                    HttpClient = HttpClient
+                };
+            }
+            else
+            {
+                CurrentWeatherProvider = new METNorwayWeatherProvider.METNorwayWeatherProvider()
+                {
+                    HttpClient = HttpClient
+                };
+            }
         }
 
         public static async Task<WeatherSummary> GetWeatherSummaryAsync(string location, TemperatureScale temperatureScale) => 
