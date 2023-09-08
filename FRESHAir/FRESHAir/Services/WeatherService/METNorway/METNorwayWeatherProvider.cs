@@ -36,7 +36,8 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
                 {
                     CurrentTemperature = Temperature.FromCelsius(forecastTime.Data.CurrentData.Observation.AirTemperature).WithScale(temperatureScale),
                     RelativeHumidity = forecastTime.Data.CurrentData.Observation.RelativeHumidity,
-                    Time = forecastTime.Time.ToLocalTime()
+                    Time = forecastTime.Time.ToLocalTime(),
+                    Icon = $"avares://FRESHAir/Assets/WeatherIcons/{forecastTime.Data.NextHour?.Summary.SymbolCode}.png"
                 });
             }
 
@@ -46,7 +47,8 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
                 {
                     CurrentTemperature = Temperature.FromCelsius(weatherNow.Data.CurrentData.Observation.AirTemperature).WithScale(temperatureScale),
                     RelativeHumidity = weatherNow.Data.CurrentData.Observation.RelativeHumidity,
-                    Time = weatherNow.Time.ToLocalTime()
+                    Time = weatherNow.Time.ToLocalTime(),
+                    Icon = $"avares://FRESHAir/Assets/WeatherIcons/{weatherNow.Data.NextHour.Summary.SymbolCode}.png"
                 },
                 ForecastedWeather = forecastAsGeneralWeatherObservation.ToArray(),
                 LocationName = locationToUse.Name,
@@ -110,12 +112,30 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
     {
         [JsonPropertyName("instant")]
         public METNorwayWeatherTimeseriesInstantData CurrentData { get; set; }
+
+        [JsonPropertyName("next_12_hours")]
+        public METNorwayWeatherTimeseriesFutureData Next12Hours { get; set; }
+
+        [JsonPropertyName("next_1_hours")]
+        public METNorwayWeatherTimeseriesFutureData NextHour { get; set; }
     }
 
     public class METNorwayWeatherTimeseriesInstantData
     {
         [JsonPropertyName("details")]
         public METNorwayWeatherObservation Observation { get; set; }
+    }
+
+    public class METNorwayWeatherTimeseriesFutureData
+    {
+        [JsonPropertyName("summary")]
+        public METNorwayWeatherTimeseriesFutureSummaryData Summary { get; set; }
+    }
+
+    public class METNorwayWeatherTimeseriesFutureSummaryData
+    {
+        [JsonPropertyName("symbol_code")]
+        public string SymbolCode { get; set; }
     }
 
     public class METNorwayWeatherObservation

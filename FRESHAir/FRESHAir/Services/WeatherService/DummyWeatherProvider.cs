@@ -22,7 +22,8 @@ namespace FRESHAir.Services.WeatherService
                 {
                     CurrentTemperature = Temperature.FromFahrenheit(87),
                     RelativeHumidity = 78.2M,
-                    Time = new DateTime(2023, 9, 7, 1, 0, 0)
+                    Time = new DateTime(2023, 9, 7, 1, 0, 0),
+                    Icon = "avares://FRESHAir/Assets/WeatherIcons/clearsky_day.png"
                 },
                 ForecastedWeather = new WeatherObservation[]
                 {
@@ -30,25 +31,29 @@ namespace FRESHAir.Services.WeatherService
                     {
                         CurrentTemperature = Temperature.FromFahrenheit(82),
                         RelativeHumidity = 78.2M,
-                        Time = new DateTime(2023, 9, 7, 2, 0, 0)
+                        Time = new DateTime(2023, 9, 7, 2, 0, 0),
+                        Icon = "avares://FRESHAir/Assets/WeatherIcons/clearsky_day.png"
                     },
                     new WeatherObservation()
                     {
                         CurrentTemperature = Temperature.FromFahrenheit(76),
                         RelativeHumidity = 78.2M,
-                        Time = new DateTime(2023, 9, 7, 3, 0, 0)
+                        Time = new DateTime(2023, 9, 7, 3, 0, 0),
+                        Icon = "avares://FRESHAir/Assets/WeatherIcons/clearsky_day.png"
                     },
                     new WeatherObservation()
                     {
                         CurrentTemperature = Temperature.FromFahrenheit(70),
                         RelativeHumidity = 78.2M,
-                        Time = new DateTime(2023, 9, 8, 2, 0, 0)
+                        Time = new DateTime(2023, 9, 8, 2, 0, 0),
+                        Icon = "avares://Assets/WeatherIcons/clearsky_day.png"
                     },
                     new WeatherObservation()
                     {
                         CurrentTemperature = Temperature.FromFahrenheit(60),
                         RelativeHumidity = 78.2M,
-                        Time = new DateTime(2023, 9, 9, 2, 0, 0)
+                        Time = new DateTime(2023, 9, 9, 2, 0, 0),
+                        Icon = "avares://FRESHAir/Assets/WeatherIcons/clearsky_day.png"
                     },
                 }
             };

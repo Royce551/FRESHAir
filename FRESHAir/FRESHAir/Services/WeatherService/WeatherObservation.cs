@@ -13,5 +13,7 @@ namespace FRESHAir.Services.WeatherService
         public Temperature CurrentTemperature { get; init; }
 
         public decimal RelativeHumidity { get; init; }
+
+        public string Icon { get; init; }
     }
 }
