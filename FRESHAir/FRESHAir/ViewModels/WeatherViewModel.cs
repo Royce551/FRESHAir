@@ -14,10 +14,18 @@ using System.Threading.Tasks;
 
 namespace FRESHAir.ViewModels
 {
-    public partial class WeatherViewViewModel : ViewModelBase
+    public partial class WeatherViewModel : ViewModelBase
     {
-        [ObservableProperty]
-        private Temperature currentTemperature = Temperature.FromCelsius(29);
+        private string? searchCity = "New Orleans";
+        public string? SearchCity
+        {
+            get => searchCity;
+            set
+            {
+                SetProperty(ref searchCity, value);
+                _ = Initialize();
+            }
+        }
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Location))]
@@ -34,7 +42,7 @@ namespace FRESHAir.ViewModels
             get => scale;
             set
             {
-                CurrentTemperature.Scale = value;
+                //CurrentTemperature.Scale = value;
                 SetProperty(ref scale, value);
             }
         }
@@ -42,7 +50,7 @@ namespace FRESHAir.ViewModels
 
         public async Task Initialize()
         {
-            CurrentWeatherSummary = await WeatherService.GetWeatherSummaryAsync("Tokyo", TemperatureScale.Fahrenheit);
+            CurrentWeatherSummary = await WeatherService.GetWeatherSummaryAsync(searchCity, TemperatureScale.Fahrenheit);
         }
 
     }

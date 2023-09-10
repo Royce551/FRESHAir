@@ -6,9 +6,9 @@
              xmlns:weathertypes="clr-namespace:FRESHAir.Services.WeatherService"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="FRESHAir.Views.WeatherView"
-             x:DataType="vm:WeatherViewViewModel">
+             x:DataType="vm:WeatherViewModel">
   <Design.DataContext>
-    <vm:WeatherViewViewModel/>
+    <vm:WeatherViewModel/>
   </Design.DataContext>
 
   <UserControl.Resources>

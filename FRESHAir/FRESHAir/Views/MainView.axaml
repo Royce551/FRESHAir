@@ -13,5 +13,42 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <views:WeatherView/>
+  <UserControl.Resources>
+    <vm:TemperatureToStringConverter x:Key="temperatureToStringConverter"/>
+    <vm:BitmapAssetValueConverter x:Key="bitmapAssetValueConverter"/>
+  </UserControl.Resources>
+
+  <DockPanel >
+    <StackPanel Background="{DynamicResource SecondaryColor}" MinWidth="250">
+      <DockPanel Margin="10,5">
+        <Button Margin="5,0,0,0" DockPanel.Dock="Right" Content="Add" Command="{Binding AddSearchedLocation}"/>
+        <TextBox Watermark="Search for a location" Text="{Binding LocationSearchText}"/>
+      </DockPanel>
+      
+      <ListBox DockPanel.Dock="Left" ItemsSource="{Binding WeatherViews}" SelectedItem="{Binding SelectedWeatherView}" Background="{DynamicResource SecondaryColor}">
+        <ListBox.DataTemplates>
+          <DataTemplate DataType="vm:WeatherViewModel">
+            <StackPanel>
+              <TextBlock Text="{Binding Location}"/>
+              <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding CurrentWeatherSummary.CurrentWeather.Icon, Converter={StaticResource bitmapAssetValueConverter}}" Width="50" Height="50"/>
+                <TextBlock Text="{Binding CurrentWeatherSummary.CurrentWeather.CurrentTemperature, Converter={StaticResource temperatureToStringConverter}}" FontWeight="Bold" VerticalAlignment="Center" FontSize="30"/>
+              </StackPanel>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.DataTemplates>
+      </ListBox>
+    </StackPanel>
+
+
+    <TransitioningContentControl Content="{Binding SelectedWeatherView}">
+      <TransitioningContentControl.PageTransition>
+        <!--<PageSlide Orientation="Vertical" Duration="0:00:00.200" SlideOutEasing="ExponentialEaseOut" SlideInEasing="ExponentialEaseIn"/>-->
+        <CompositePageTransition>
+          <CrossFade Duration="0:00:00.2000"/>
+          <PageSlide Orientation="Vertical" Duration="0:00:00.2000" SlideInEasing="QuadraticEaseIn" SlideOutEasing="QuadraticEaseOut"/>
+        </CompositePageTransition>
+      </TransitioningContentControl.PageTransition>
+    </TransitioningContentControl>
+  </DockPanel>
 </UserControl>

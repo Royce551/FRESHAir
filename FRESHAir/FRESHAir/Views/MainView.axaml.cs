@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using FRESHAir.ViewModels;
 
 namespace FRESHAir.Views
 {
@@ -6,6 +7,7 @@ namespace FRESHAir.Views
     {
         public MainView()
         {
+            DataContext = new MainViewModel();
             InitializeComponent();
         }
     }

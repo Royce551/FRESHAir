@@ -1,7 +1,30 @@
-﻿namespace FRESHAir.ViewModels
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
+
+namespace FRESHAir.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public partial class MainViewModel : ViewModelBase
     {
-        public string Greeting => "Dazzling colors spray from the canvas.";
+        public ObservableCollection<WeatherViewModel> WeatherViews { get; set; } = new()
+        {
+            new WeatherViewModel
+            {
+                SearchCity = "Lafayette"
+            }
+        };
+
+        [ObservableProperty]
+        private WeatherViewModel? selectedWeatherView;
+
+        [ObservableProperty]
+        private string? locationSearchText = null;
+
+        public void AddSearchedLocation()
+        {
+            WeatherViews.Add(new WeatherViewModel
+            {
+                SearchCity = LocationSearchText
+            });
+        }
     }
 }
