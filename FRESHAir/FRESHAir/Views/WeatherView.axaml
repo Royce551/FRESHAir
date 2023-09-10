@@ -15,31 +15,38 @@
     <vm:TemperatureToStringConverter x:Key="temperatureToStringConverter"/>
     <vm:BitmapAssetValueConverter x:Key="bitmapAssetValueConverter"/>
   </UserControl.Resources>
-  
-  <ScrollViewer>
-    <WrapPanel Margin="10" HorizontalAlignment="Center" MaxWidth="1000">
-      <Border Margin="20,20,50,50">
-        <StackPanel>
-          <TextBlock Text="{Binding Location}"/>
-          <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding CurrentWeatherSummary.CurrentWeather.CurrentTemperature, Converter={StaticResource temperatureToStringConverter}}" FontWeight="Bold" FontSize="60" VerticalAlignment="Center"/>
-            <Image Margin="5,0,0,0" Source="{Binding CurrentWeatherSummary.CurrentWeather.Icon, Converter={StaticResource bitmapAssetValueConverter}}" Width="100" Height="100"/>
-          </StackPanel>
-          <Grid ColumnDefinitions="Auto, Auto, Auto" RowDefinitions="Auto">
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Humidity" Foreground="{DynamicResource SecondaryTextColor}"/>
-            <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.RelativeHumidity}"/>
-            <TextBlock Grid.Column="2" Grid.Row="0" Text="%"/>
-          </Grid>
-        </StackPanel>
-      </Border>
 
-      <Border Margin="20,20,0,0" Background="{DynamicResource SecondaryColor}" CornerRadius="5" Padding="10">
-        <StackPanel>
-          <TextBlock Text="Day Ahead" FontWeight="Bold" Margin="0,0,0,10"/>
+  <Panel>
+    <Image ZIndex="0" Source="{Binding BackgroundImage}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="UniformToFill" Margin="-10">
+      <Image.Effect>
+        <BlurEffect Radius="30"/>
+      </Image.Effect>
+    </Image>
+    <Rectangle Fill="{DynamicResource BackgroundColor}" Opacity="0.55"/>
+    <ScrollViewer ZIndex="2">
+      <WrapPanel Margin="10" HorizontalAlignment="Center" MaxWidth="1000">
+        <Border Margin="20,20,50,50">
+          <StackPanel>
+            <TextBlock Text="{Binding Location}"/>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding CurrentWeatherSummary.CurrentWeather.CurrentTemperature, Converter={StaticResource temperatureToStringConverter}}" FontWeight="Bold" FontSize="60" VerticalAlignment="Center"/>
+              <Image Margin="5,0,0,0" Source="{Binding CurrentWeatherSummary.CurrentWeather.Icon, Converter={StaticResource bitmapAssetValueConverter}}" Width="100" Height="100"/>
+            </StackPanel>
+            <Grid ColumnDefinitions="Auto, Auto, Auto" RowDefinitions="Auto">
+              <TextBlock Grid.Column="0" Grid.Row="0" Text="Humidity" Foreground="{DynamicResource SecondaryTextColor}"/>
+              <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.RelativeHumidity}"/>
+              <TextBlock Grid.Column="2" Grid.Row="0" Text="%"/>
+            </Grid>
+          </StackPanel>
+        </Border>
+
+        <Border Margin="20,20,0,0" Background="{DynamicResource SecondaryColor}" CornerRadius="5" Padding="10">
+          <StackPanel>
+            <TextBlock Text="Day Ahead" FontWeight="Bold" Margin="0,0,0,10"/>
             <ItemsControl ItemsSource="{Binding ObservationsForNext12Hours}">
               <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
+                  <WrapPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
               </ItemsControl.ItemsPanel>
               <ItemsControl.ItemTemplate>
@@ -54,26 +61,28 @@
               </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-        </StackPanel>
-      </Border>
+          </StackPanel>
+        </Border>
 
-      <Border Margin="20,20,0,0" Background="{DynamicResource SecondaryColor}" CornerRadius="5" Padding="10">
-        <StackPanel>
-          <TextBlock Text="Week Ahead" FontWeight="Bold"/>
-          <ItemsControl Margin="0,10,0,0" ItemsSource="{Binding CurrentWeatherSummary.ForecastedWeather}">
-            <ItemsControl.ItemTemplate>
-              <DataTemplate DataType="weathertypes:WeatherObservation">
-                <StackPanel Orientation="Horizontal">
-                  <TextBlock Text="{Binding Time, StringFormat=dddd}" Foreground="{DynamicResource SecondaryTextColor}"/>
-                  <TextBlock Margin="10,0,0,0" Text="{Binding CurrentTemperature, Converter={StaticResource temperatureToStringConverter}}"/>
-                  <TextBlock Margin="10,0,0,0" Text="{Binding RelativeHumidity}"/>
-                </StackPanel>
-              </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
-        </StackPanel>
-      </Border>
-    </WrapPanel>
-  </ScrollViewer>
+        <Border Margin="20,20,0,0" Background="{DynamicResource SecondaryColor}" CornerRadius="5" Padding="10">
+          <StackPanel>
+            <TextBlock Text="Week Ahead" FontWeight="Bold"/>
+            <ItemsControl Margin="0,10,0,0" ItemsSource="{Binding CurrentWeatherSummary.ForecastedWeather}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="weathertypes:WeatherObservation">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Time, StringFormat=dddd}" Foreground="{DynamicResource SecondaryTextColor}"/>
+                    <TextBlock Margin="10,0,0,0" Text="{Binding CurrentTemperature, Converter={StaticResource temperatureToStringConverter}}"/>
+                    <TextBlock Margin="10,0,0,0" Text="{Binding RelativeHumidity}"/>
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+      </WrapPanel>
+    </ScrollViewer>
+  </Panel>
+ 
  
 </UserControl>

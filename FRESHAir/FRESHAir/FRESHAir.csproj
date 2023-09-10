@@ -12,6 +12,29 @@
   </ItemGroup>
 
   
+  <ItemGroup>
+    <AvaloniaResource Remove="Assets\Backgrounds\Cloudy\beach-1852930_1920.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Credits.txt" />
+    <AvaloniaResource Remove="Assets\Backgrounds\DayPartlyCloudy\DSC001603.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\DayPartlyCloudy\DSC001943.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Day\DSC000603.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Day\DSC000633.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Fog\DSC00011~2.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Fog\DSC00017~2.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Fog\DSC00082~2.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\NightPartlyCloudy\cloudy-1869753_1920.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\NightPartlyCloudy\night-923007_1920.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Night\aurora-1197753_1920.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Night\stars-1845140_1920.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Rain\PXL_20210828_135050089~2.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Snow\DSC00004~2.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Snow\DSC00010~2.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Snow\DSC00049~2.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Storm\PXL_20210717_110325672~2.jpg" />
+    <AvaloniaResource Remove="Assets\Backgrounds\Storm\PXL_20210827_145419925.jpg" />
+  </ItemGroup>
+
+  
   
 
   <ItemGroup>
@@ -274,5 +297,65 @@
     <AvaloniaResource Update="Assets\WeatherIcons\snowshowers_polartwilight.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </AvaloniaResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Backgrounds\Cloudy\beach-1852930_1920.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Credits.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\DayPartlyCloudy\DSC001603.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\DayPartlyCloudy\DSC001943.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Day\DSC000603.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Day\DSC000633.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Fog\DSC00011~2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Fog\DSC00017~2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Fog\DSC00082~2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\NightPartlyCloudy\cloudy-1869753_1920.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\NightPartlyCloudy\night-923007_1920.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Night\aurora-1197753_1920.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Night\stars-1845140_1920.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Rain\PXL_20210828_135050089~2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Snow\DSC00004~2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Snow\DSC00010~2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Snow\DSC00049~2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Storm\PXL_20210717_110325672~2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Backgrounds\Storm\PXL_20210827_145419925.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

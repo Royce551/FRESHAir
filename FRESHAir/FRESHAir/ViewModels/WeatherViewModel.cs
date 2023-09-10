@@ -7,6 +7,7 @@ using FRESHAir.Services.WeatherService;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -47,12 +48,96 @@ namespace FRESHAir.ViewModels
             }
         }
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(BackgroundImage))]
+        private string? backgroundImagePath = null;
+
+        public Bitmap? BackgroundImage
+        {
+            get
+            {
+                if (BackgroundImagePath is null) return null;
+                else return new Bitmap(BackgroundImagePath);
+            }
+        }
 
         public async Task Initialize()
         {
-            CurrentWeatherSummary = await WeatherService.GetWeatherSummaryAsync(searchCity, TemperatureScale.Fahrenheit);
+            if (SearchCity is null) return;
+
+            CurrentWeatherSummary = await WeatherService.GetWeatherSummaryAsync(SearchCity, TemperatureScale.Fahrenheit);
+
+            var backgroundDirectory = AssociateWeatherIconWithBackground(CurrentWeatherSummary.CurrentWeather.Icon) switch
+            {
+                BackgroundType.Day => "Assets/Backgrounds/Day",
+                BackgroundType.DayPartlyCloudy => "Assets/Backgrounds/DayPartlyCloudy",
+                BackgroundType.Night => "Assets/Backgrounds/Night",
+                BackgroundType.NightPartlyCloudy => "Assets/Backgrounds/NightPartlyCloudy",
+                BackgroundType.Cloudy => "Assets/Backgrounds/Cloudy",
+                BackgroundType.Fog => "Assets/Backgrounds/Fog",
+                BackgroundType.Storm => "Assets/Backgrounds/Storm",
+                BackgroundType.Rain => "Assets/Backgrounds/Rain",
+                BackgroundType.Snow => "Assets/Backgrounds/Snow",
+                _ => throw new Exception()
+            };
+
+            var images = Directory.EnumerateFiles(backgroundDirectory).ToList();
+
+            BackgroundImagePath = images[Random.Shared.Next(0, images.Count)];
         }
 
+        private BackgroundType AssociateWeatherIconWithBackground(string weatherIcon)
+        {
+            var rawImagePath = Path.GetFileNameWithoutExtension(weatherIcon);
+            BackgroundType backgroundType = BackgroundType.Day;
+
+            switch (rawImagePath)
+            {
+                case "clearsky_day":
+                    backgroundType = BackgroundType.Day;
+                    break;
+                case "clearsky_night":
+                    backgroundType = BackgroundType.Night;
+                    break;
+                case "fair_day":
+                case "fair_polartwilight":
+                case "partlycloudy_day":
+                case "partlycloudy_polartwilight":
+                    backgroundType = BackgroundType.DayPartlyCloudy;
+                    break;
+                case "fair_night":
+                case "partlycloudy_night":
+                    backgroundType = BackgroundType.NightPartlyCloudy;
+                    break;
+                case "cloudy":
+                    backgroundType = BackgroundType.Cloudy;
+                    break;
+                case "fog":
+                    backgroundType = BackgroundType.Fog;
+                    break;
+                default:
+                    if (rawImagePath.Contains("storm")) backgroundType = BackgroundType.Storm;
+                    else if (rawImagePath.Contains("rain")) backgroundType = BackgroundType.Rain;
+                    else if (rawImagePath.Contains("sleet") || weatherIcon.Contains("snow")) backgroundType = BackgroundType.Snow;
+                    else if (rawImagePath.Contains("showers")) backgroundType = BackgroundType.Storm;
+                    break;
+            }
+
+            return backgroundType;
+        }
+    }
+
+    public enum BackgroundType
+    {
+        Day,
+        DayPartlyCloudy,
+        Night,
+        NightPartlyCloudy,
+        Cloudy,
+        Fog,
+        Rain,
+        Snow,
+        Storm
     }
 
     public class TemperatureToStringConverter : IValueConverter
