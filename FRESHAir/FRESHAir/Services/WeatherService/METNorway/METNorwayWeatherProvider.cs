@@ -21,9 +21,14 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
 
             var responseAsString = await response.Content.ReadAsStringAsync();
             var possibleLocations = JsonSerializer.Deserialize<List<TheTroposphereLocation>>(responseAsString) ?? throw new Exception();
+
             var locationToUse = possibleLocations[0];
 
+            var timeZone = TimeZoneInfo.FindSystemTimeZoneById(locationToUse.TimezoneString);
+
             var forecast = await HttpClient.GetFromJsonAsync<METNorwayWeatherResponse>($"https://api.met.no/weatherapi/locationforecast/2.0/complete?lat={locationToUse.Latitude}&lon={locationToUse.Longitude}") ?? throw new Exception();
+
+            
 
             var weatherNow = forecast.Properties.Timeseries[0];
             var weatherForecast = forecast.Properties.Timeseries.Take(new Range(new(1), new(forecast.Properties.Timeseries.Length)));
@@ -36,7 +41,7 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
                 {
                     CurrentTemperature = Temperature.FromCelsius(forecastTime.Data.CurrentData.Observation.AirTemperature).WithScale(temperatureScale),
                     RelativeHumidity = forecastTime.Data.CurrentData.Observation.RelativeHumidity,
-                    Time = forecastTime.Time.ToLocalTime(),
+                    Time = TimeZoneInfo.ConvertTimeFromUtc(forecastTime.Time, timeZone),
                     Icon = $"avares://FRESHAir/Assets/WeatherIcons/{forecastTime.Data.NextHour?.Summary.SymbolCode}.png"
                 });
             }
@@ -47,7 +52,7 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
                 {
                     CurrentTemperature = Temperature.FromCelsius(weatherNow.Data.CurrentData.Observation.AirTemperature).WithScale(temperatureScale),
                     RelativeHumidity = weatherNow.Data.CurrentData.Observation.RelativeHumidity,
-                    Time = weatherNow.Time.ToLocalTime(),
+                    Time = TimeZoneInfo.ConvertTimeFromUtc(weatherNow.Time, timeZone),
                     Icon = $"avares://FRESHAir/Assets/WeatherIcons/{weatherNow.Data.NextHour.Summary.SymbolCode}.png"
                 },
                 ForecastedWeather = forecastAsGeneralWeatherObservation.ToArray(),
@@ -74,6 +79,9 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
 
         [JsonPropertyName("admin1")]
         public string Admin1 { get; set; } = default!;
+
+        [JsonPropertyName("timezone")]
+        public string TimezoneString { get; set; } = default!;
     }
 
     public class METNorwayWeatherResponse

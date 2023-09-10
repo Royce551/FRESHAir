@@ -28,6 +28,7 @@
           <SolidColorBrush x:Key="ControlBoxColor" Color="#e6e6e6"/>
           <SolidColorBrush x:Key="BackgroundColor" Color="#FFFFFF"/>
           <SolidColorBrush x:Key="SecondaryColor" Color="#f2f2f2"/>
+          <SolidColorBrush x:Key="SecondaryColorOverAcrylic" Color="#7ff2f2f2"/>
           <SolidColorBrush x:Key="ForegroundColor" Color="#e6e6e6"/>
           <SolidColorBrush x:Key="ControlColor" Color="#A1A1A1"/>
 

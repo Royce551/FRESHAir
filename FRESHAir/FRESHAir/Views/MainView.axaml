@@ -31,8 +31,9 @@
             <StackPanel>
               <TextBlock Text="{Binding Location}"/>
               <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding CurrentWeatherSummary.CurrentWeather.Icon, Converter={StaticResource bitmapAssetValueConverter}}" Width="50" Height="50"/>
+               
                 <TextBlock Text="{Binding CurrentWeatherSummary.CurrentWeather.CurrentTemperature, Converter={StaticResource temperatureToStringConverter}}" FontWeight="Bold" VerticalAlignment="Center" FontSize="30"/>
+                <Image Margin="5,0,0,0" Source="{Binding CurrentWeatherSummary.CurrentWeather.Icon, Converter={StaticResource bitmapAssetValueConverter}}" Width="50" Height="50"/>
               </StackPanel>
             </StackPanel>
           </DataTemplate>
@@ -45,8 +46,8 @@
       <TransitioningContentControl.PageTransition>
         <!--<PageSlide Orientation="Vertical" Duration="0:00:00.200" SlideOutEasing="ExponentialEaseOut" SlideInEasing="ExponentialEaseIn"/>-->
         <CompositePageTransition>
-          <CrossFade Duration="0:00:00.2000"/>
-          <PageSlide Orientation="Vertical" Duration="0:00:00.2000" SlideInEasing="QuadraticEaseIn" SlideOutEasing="QuadraticEaseOut"/>
+          <CrossFade Duration="0:00:00.1"/>
+          <PageSlide Orientation="Vertical" Duration="0:00:00.3" SlideInEasing="QuadraticEaseOut" SlideOutEasing="QuadraticEaseIn"/>
         </CompositePageTransition>
       </TransitioningContentControl.PageTransition>
     </TransitioningContentControl>

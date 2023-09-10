@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:FRESHAir.ViewModels"
              xmlns:weathertypes="clr-namespace:FRESHAir.Services.WeatherService"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Background="{DynamicResource BackgroundColor}"
              x:Class="FRESHAir.Views.WeatherView"
              x:DataType="vm:WeatherViewModel">
   <Design.DataContext>
@@ -22,8 +22,8 @@
         <StackPanel>
           <TextBlock Text="{Binding Location}"/>
           <StackPanel Orientation="Horizontal">
-            <Image Source="{Binding CurrentWeatherSummary.CurrentWeather.Icon, Converter={StaticResource bitmapAssetValueConverter}}" Width="100" Height="100"/>
             <TextBlock Text="{Binding CurrentWeatherSummary.CurrentWeather.CurrentTemperature, Converter={StaticResource temperatureToStringConverter}}" FontWeight="Bold" FontSize="60" VerticalAlignment="Center"/>
+            <Image Margin="5,0,0,0" Source="{Binding CurrentWeatherSummary.CurrentWeather.Icon, Converter={StaticResource bitmapAssetValueConverter}}" Width="100" Height="100"/>
           </StackPanel>
           <Grid ColumnDefinitions="Auto, Auto, Auto" RowDefinitions="Auto">
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Humidity" Foreground="{DynamicResource SecondaryTextColor}"/>
