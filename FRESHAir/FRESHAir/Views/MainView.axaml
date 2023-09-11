@@ -25,7 +25,7 @@
         <TextBox Watermark="Search for a location" Text="{Binding LocationSearchText}"/>
       </DockPanel>
       
-      <ListBox DockPanel.Dock="Left" ItemsSource="{Binding WeatherViews}" SelectedItem="{Binding SelectedWeatherView}" Background="{DynamicResource SecondaryColor}">
+      <ListBox DockPanel.Dock="Left" ItemsSource="{Binding Views}" SelectedItem="{Binding SelectedView}" Background="{DynamicResource SecondaryColor}">
         <ListBox.DataTemplates>
           <DataTemplate DataType="vm:WeatherViewModel">
             <StackPanel>
@@ -37,12 +37,15 @@
               </StackPanel>
             </StackPanel>
           </DataTemplate>
+          <DataTemplate DataType="vm:SettingsViewModel">
+            <TextBlock Text="Settings"/>
+          </DataTemplate>
         </ListBox.DataTemplates>
       </ListBox>
     </StackPanel>
 
 
-    <TransitioningContentControl Content="{Binding SelectedWeatherView}">
+    <TransitioningContentControl Content="{Binding SelectedView}">
       <TransitioningContentControl.PageTransition>
         <!--<PageSlide Orientation="Vertical" Duration="0:00:00.200" SlideOutEasing="ExponentialEaseOut" SlideInEasing="ExponentialEaseIn"/>-->
         <CompositePageTransition>

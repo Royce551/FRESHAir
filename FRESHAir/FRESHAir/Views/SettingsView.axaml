@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:FRESHAir.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" Background="{DynamicResource BackgroundColor}"
+             x:Class="FRESHAir.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+  <ScrollViewer>
+    <StackPanel Margin="20" MaxWidth="600" HorizontalAlignment="Left">
+      <TextBlock Text="General" FontWeight="Bold" FontSize="30"/>
+      
+      <TextBlock Text="Temperature Unit" FontWeight="Bold"/>
+      <RadioButton GroupName="Temperature" Content="Celsius"/>
+      <RadioButton GroupName="Temperature" Content="Fahrenheit"/>
+      <RadioButton GroupName="Temperature" Content="Kelvin"/>
+      
+      <TextBlock Text="Wind Speed Unit" FontWeight="Bold"/>
+      <RadioButton GroupName="WindSpeed" Content="km/h"/>
+      <RadioButton GroupName="WindSpeed" Content="mph"/>
+
+      <TextBlock Text="About" FontWeight="Bold" FontSize="30"/>
+      <TextBlock Text="FRESHAir 1.0.0"/>
+      <TextBlock Text="By Squid Grill (and open source contributors)"/>
+      <TextBlock Text="Thank you for using FRESHAir! ♥"/>
+      
+      <Button Content="Project website"/>
+      <Button Content="Report an issue"/>
+      
+      <TextBlock Margin="0,20,0,0" TextWrapping="Wrap" Text="Weather data from MET Norway. Location data from theTroposphere. Background images from luca009, Noel Bauza, Pexels, StockSnap on Pixabay and
+Victor Tran Community Backgrounds."/>
+      <Button Content="More information"/>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

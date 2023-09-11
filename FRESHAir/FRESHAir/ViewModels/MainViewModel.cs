@@ -5,23 +5,24 @@ namespace FRESHAir.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
-        public ObservableCollection<WeatherViewModel> WeatherViews { get; set; } = new()
+        public ObservableCollection<ViewModelBase> Views { get; set; } = new()
         {
             new WeatherViewModel
             {
                 SearchCity = "Lafayette"
-            }
+            },
+            new SettingsViewModel()
         };
 
         [ObservableProperty]
-        private WeatherViewModel? selectedWeatherView;
+        private ViewModelBase? selectedView;
 
         [ObservableProperty]
         private string? locationSearchText = null;
 
         public void AddSearchedLocation()
         {
-            WeatherViews.Add(new WeatherViewModel
+            Views.Insert(Views.Count - 1,new WeatherViewModel
             {
                 SearchCity = LocationSearchText
             });
