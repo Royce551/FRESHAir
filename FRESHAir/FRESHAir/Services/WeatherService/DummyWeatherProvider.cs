@@ -11,7 +11,7 @@ namespace FRESHAir.Services.WeatherService
     {
         public HttpClient HttpClient { get; set; } = default!;
 
-        public async Task<WeatherSummary> GetWeatherSummaryAsync(string location, TemperatureScale temperatureScale)
+        public async Task<WeatherSummary> GetWeatherSummaryAsync(string location, TemperatureScale temperatureScale, SpeedScale speedScale)
         {
             return new WeatherSummary()
             {

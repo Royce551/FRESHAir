@@ -65,7 +65,7 @@ namespace FRESHAir.ViewModels
         {
             if (SearchCity is null) return;
 
-            CurrentWeatherSummary = await WeatherService.GetWeatherSummaryAsync(SearchCity, TemperatureScale.Fahrenheit);
+            CurrentWeatherSummary = await WeatherService.GetWeatherSummaryAsync(SearchCity, TemperatureScale.Celsius, SpeedScale.KilometersPerHour);
 
             var backgroundDirectory = AssociateWeatherIconWithBackground(CurrentWeatherSummary.CurrentWeather.Icon) switch
             {
@@ -156,6 +156,31 @@ namespace FRESHAir.ViewModels
                 };
 
                 return $"{temperature.Value:F1}{decimalSymbol}";
+            }
+            else throw new ArgumentException("Converted a non-temperature with the TemperatureToStringConverter");
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SpeedToStringConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            if (value is null) return null;
+            if (value is Speed speed)
+            {
+                var unit = speed.Scale switch
+                {
+                    SpeedScale.MilesPerHour => " mph",
+                    SpeedScale.KilometersPerHour => " km/h",
+                    _ => throw new Exception()
+                };
+
+                return $"{speed.Value:F1}{unit}";
             }
             else throw new ArgumentException("Converted a non-temperature with the TemperatureToStringConverter");
         }

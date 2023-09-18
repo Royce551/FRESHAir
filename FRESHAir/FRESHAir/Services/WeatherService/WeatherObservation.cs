@@ -15,5 +15,17 @@ namespace FRESHAir.Services.WeatherService
         public decimal RelativeHumidity { get; init; }
 
         public string Icon { get; init; }
+
+        public Temperature DewPoint { get; init; }
+
+        public decimal CloudArea { get; init; }
+
+        public Speed WindSpeed { get; init; }
+
+        public Speed WindGustSpeed { get; init; }
+
+        public decimal WindFromDirection { get; init; }
+
+        public decimal UVIndex { get; init; }
     }
 }

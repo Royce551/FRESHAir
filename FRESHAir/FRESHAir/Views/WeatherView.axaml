@@ -14,6 +14,7 @@
   <UserControl.Resources>
     <vm:TemperatureToStringConverter x:Key="temperatureToStringConverter"/>
     <vm:BitmapAssetValueConverter x:Key="bitmapAssetValueConverter"/>
+    <vm:SpeedToStringConverter x:Key="speedToStringConverter"/>
   </UserControl.Resources>
 
   <Panel>
@@ -32,10 +33,47 @@
               <TextBlock Text="{Binding CurrentWeatherSummary.CurrentWeather.CurrentTemperature, Converter={StaticResource temperatureToStringConverter}}" FontWeight="Bold" FontSize="60" VerticalAlignment="Center"/>
               <Image Margin="5,0,0,0" Source="{Binding CurrentWeatherSummary.CurrentWeather.Icon, Converter={StaticResource bitmapAssetValueConverter}}" Width="100" Height="100"/>
             </StackPanel>
-            <Grid ColumnDefinitions="Auto, Auto, Auto" RowDefinitions="Auto">
-              <TextBlock Grid.Column="0" Grid.Row="0" Text="Humidity" Foreground="{DynamicResource SecondaryTextColor}"/>
-              <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.RelativeHumidity}"/>
-              <TextBlock Grid.Column="2" Grid.Row="0" Text="%"/>
+            <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+              <TextBlock Grid.Column="0" Grid.Row="0" Text="Humidity" Foreground="{DynamicResource SecondaryTextColor}" 
+                         ToolTip.Tip="Measures the amount of moisture in the air compared to what the air can hold. A value near 100% means that there may be dew or fog."/>
+              <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
+                <TextBlock Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.RelativeHumidity}"/>
+                <TextBlock Text="%"/>
+              </StackPanel>
+
+              <TextBlock Grid.Column="0" Grid.Row="1" Text="Dew Point" Foreground="{DynamicResource SecondaryTextColor}"
+                         ToolTip.Tip="What the temperature would need to be for dew to form. The higher the dew point, the more humid it feels."/>
+              <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.DewPoint, Converter={StaticResource temperatureToStringConverter}}"/>
+              </StackPanel>
+
+              <TextBlock Grid.Column="0" Grid.Row="2" Text="Cloud Area" Foreground="{DynamicResource SecondaryTextColor}"/>
+              <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                <TextBlock  Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.CloudArea}"/>
+                <TextBlock Text="%"/>
+              </StackPanel>
+
+              <TextBlock Grid.Column="0" Grid.Row="3" Text="Wind Speed" Foreground="{DynamicResource SecondaryTextColor}"/>
+              <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                <TextBlock Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.WindSpeed, Converter={StaticResource speedToStringConverter}}"/>
+              </StackPanel>
+
+              <TextBlock Grid.Column="0" Grid.Row="4" Text="Wind Gust Speed" Foreground="{DynamicResource SecondaryTextColor}"/>
+              <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+                <TextBlock Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.WindGustSpeed, Converter={StaticResource speedToStringConverter}}"/>
+              </StackPanel>
+
+              <TextBlock Grid.Column="0" Grid.Row="5" Text="Wind Direction" Foreground="{DynamicResource SecondaryTextColor}"/>
+              <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
+                <TextBlock Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.WindFromDirection}"/>
+                <TextBlock Text="°"/>
+              </StackPanel>
+
+              <TextBlock Grid.Column="0" Grid.Row="6" Text="UV Index" Foreground="{DynamicResource SecondaryTextColor}" ToolTip.Tip="Measures ultraviolet radiation. The higher the UVI, the higher the potential for damage. The World Health Organization recommends
+shade, sunscreen, hats, and protective clothing at levels of 3 or higher."/>
+              <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal">
+                <TextBlock Margin="10,0,0,0" Text="{Binding CurrentWeatherSummary.CurrentWeather.UVIndex}"/>
+              </StackPanel>
             </Grid>
           </StackPanel>
         </Border>

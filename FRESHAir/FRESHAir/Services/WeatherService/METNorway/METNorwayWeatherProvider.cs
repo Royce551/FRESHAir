@@ -15,7 +15,7 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
     {
         public HttpClient HttpClient { get; init; } = default!;
 
-        public async Task<WeatherSummary> GetWeatherSummaryAsync(string location, TemperatureScale temperatureScale)
+        public async Task<WeatherSummary> GetWeatherSummaryAsync(string location, TemperatureScale temperatureScale, SpeedScale speedScale)
         {
             var response = await HttpClient.PostAsync("https://api-thetroposphere.vicr123.com/api/locations/search", new StringContent($"{{\"query\":\"{location}\"}}", Encoding.UTF8, "application/json"));
 
@@ -42,7 +42,13 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
                     CurrentTemperature = Temperature.FromCelsius(forecastTime.Data.CurrentData.Observation.AirTemperature).WithScale(temperatureScale),
                     RelativeHumidity = forecastTime.Data.CurrentData.Observation.RelativeHumidity,
                     Time = TimeZoneInfo.ConvertTimeFromUtc(forecastTime.Time, timeZone),
-                    Icon = $"avares://FRESHAir/Assets/WeatherIcons/{forecastTime.Data.NextHour?.Summary.SymbolCode}.png"
+                    Icon = $"avares://FRESHAir/Assets/WeatherIcons/{forecastTime.Data.NextHour?.Summary.SymbolCode}.png",
+                    DewPoint = Temperature.FromCelsius(forecastTime.Data.CurrentData.Observation.DewPoint).WithScale(temperatureScale),
+                    CloudArea = forecastTime.Data.CurrentData.Observation.CloudArea,
+                    WindSpeed = Speed.FromMetersPerSecond(forecastTime.Data.CurrentData.Observation.WindSpeed).WithScale(speedScale),
+                    WindGustSpeed = Speed.FromMetersPerSecond(forecastTime.Data.CurrentData.Observation.WindGustSpeed).WithScale(speedScale),
+                    WindFromDirection = forecastTime.Data.CurrentData.Observation.WindFromDirection,
+                    UVIndex = forecastTime.Data.CurrentData.Observation.UVIndex
                 });
             }
 
@@ -53,7 +59,13 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
                     CurrentTemperature = Temperature.FromCelsius(weatherNow.Data.CurrentData.Observation.AirTemperature).WithScale(temperatureScale),
                     RelativeHumidity = weatherNow.Data.CurrentData.Observation.RelativeHumidity,
                     Time = TimeZoneInfo.ConvertTimeFromUtc(weatherNow.Time, timeZone),
-                    Icon = $"avares://FRESHAir/Assets/WeatherIcons/{weatherNow.Data.NextHour.Summary.SymbolCode}.png"
+                    Icon = $"avares://FRESHAir/Assets/WeatherIcons/{weatherNow.Data.NextHour.Summary.SymbolCode}.png",
+                    DewPoint = Temperature.FromCelsius(weatherNow.Data.CurrentData.Observation.DewPoint).WithScale(temperatureScale),
+                    CloudArea = weatherNow.Data.CurrentData.Observation.CloudArea,
+                    WindSpeed = Speed.FromMetersPerSecond(weatherNow.Data.CurrentData.Observation.WindSpeed).WithScale(speedScale),
+                    WindGustSpeed = Speed.FromMetersPerSecond(weatherNow.Data.CurrentData.Observation.WindGustSpeed).WithScale(speedScale),
+                    WindFromDirection = weatherNow.Data.CurrentData.Observation.WindFromDirection,
+                    UVIndex = weatherNow.Data.CurrentData.Observation.UVIndex
                 },
                 ForecastedWeather = forecastAsGeneralWeatherObservation.ToArray(),
                 LocationName = locationToUse.Name,
@@ -157,6 +169,12 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
         [JsonPropertyName("relative_humidity")]
         public decimal RelativeHumidity { get; set; }
 
+        [JsonPropertyName("dew_point_temperature")]
+        public decimal DewPoint { get; set; }
+
+        [JsonPropertyName("cloud_area_fraction")]
+        public decimal CloudArea { get; set; }
+
         [JsonPropertyName("wind_from_direction")]
         public decimal WindFromDirection { get; set; }
 
@@ -165,5 +183,8 @@ namespace FRESHAir.Services.WeatherService.METNorwayWeatherProvider
 
         [JsonPropertyName("wind_speed_of_gust")]
         public decimal WindGustSpeed { get; set; }
+
+        [JsonPropertyName("ultraviolet_index_clear_sky")]
+        public decimal UVIndex { get; set; }
     }
 }
